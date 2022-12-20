@@ -1,4 +1,38 @@
+import axios from "axios";
+
 const Card = (article) => {
+  const div = document.createElement('div');
+  div.classList.add('card')
+
+  const headline = document.createElement('div')
+  headline.classList.add('headline')
+  headline.textContent = article.headline
+
+  const author = document.createElement('div')
+  author.classList.add('author')
+
+  const imgContainer = document.createElement('div')
+  imgContainer.classList.add('img-container')
+
+  const img = document.createElement('img')
+  img.setAttribute('src', article.authorPhoto)
+  
+
+  const span = document.createElement('span')
+  span.textContent = article.authorName
+
+
+  div.appendChild(headline)
+  div.appendChild(author)
+  div.appendChild(imgContainer)
+  div.appendChild(img)
+  div.appendChild(span)
+
+  div.addEventListener('click', () => {
+    console.log(headline.textContent)
+  })
+
+  return div
   // TASK 5
   // ---------------------
   // Implement this function, which should return the markup you see below.
@@ -19,7 +53,38 @@ const Card = (article) => {
   //
 }
 
+
 const cardAppender = (selector) => {
+  axios.get(`http://localhost:5001/api/articles`)
+  .then(res => {
+    console.log(res);
+    const selectors = document.querySelector(selector)
+    res.data.articles.bootstrap.map(item => {
+      let newCard1 = Card(item)
+      selectors.appendChild(newCard1)
+    })
+    res.data.articles.javascript.map(item => {
+      let newCard2 = Card(item)
+      selectors.appendChild(newCard2)
+    })
+    res.data.articles.jquery.map(item => {
+      let newCard3 = Card(item)
+      selectors.appendChild(newCard3)
+    })
+    res.data.articles.node.map(item => {
+      let newCard4 = Card(item)
+      selectors.appendChild(newCard4)
+    })
+    res.data.articles.technology.map(item => {
+      let newCard5 = Card(item)
+      selectors.appendChild(newCard5)
+    })
+
+  }) 
+  .catch(err => {
+    console.error(err)
+  })
+  .finally(() => console.log('IM FINISHED!'))
   // TASK 6
   // ---------------------
   // Implement this function that takes a css selector as its only argument.

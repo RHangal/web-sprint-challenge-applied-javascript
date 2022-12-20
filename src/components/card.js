@@ -24,9 +24,9 @@ const Card = (article) => {
 
   div.appendChild(headline)
   div.appendChild(author)
-  div.appendChild(imgContainer)
-  div.appendChild(img)
-  div.appendChild(span)
+  author.appendChild(imgContainer)
+  imgContainer.appendChild(img)
+  author.appendChild(span)
 
   div.addEventListener('click', () => {
     console.log(headline.textContent)
@@ -59,6 +59,7 @@ const cardAppender = (selector) => {
   .then(res => {
     console.log(res);
     const selectors = document.querySelector(selector)
+
     res.data.articles.bootstrap.map(item => {
       let newCard1 = Card(item)
       selectors.appendChild(newCard1)

@@ -59,27 +59,35 @@ const cardAppender = (selector) => {
   .then(res => {
     console.log(res);
     const selectors = document.querySelector(selector)
-
-    res.data.articles.bootstrap.map(item => {
+    const obj = Object.values(res.data.articles).flat();
+    console.log(obj)
+//lets try with one flattened array
+    obj.map(item => {
       let newCard1 = Card(item)
       selectors.appendChild(newCard1)
     })
-    res.data.articles.javascript.map(item => {
-      let newCard2 = Card(item)
-      selectors.appendChild(newCard2)
-    })
-    res.data.articles.jquery.map(item => {
-      let newCard3 = Card(item)
-      selectors.appendChild(newCard3)
-    })
-    res.data.articles.node.map(item => {
-      let newCard4 = Card(item)
-      selectors.appendChild(newCard4)
-    })
-    res.data.articles.technology.map(item => {
-      let newCard5 = Card(item)
-      selectors.appendChild(newCard5)
-    })
+
+//method without flattening the array
+    // res.data.articles.bootstrap.map(item => {
+    //   let newCard1 = Card(item)
+    //   selectors.appendChild(newCard1)
+    // })
+    // res.data.articles.javascript.map(item => {
+    //   let newCard2 = Card(item)
+    //   selectors.appendChild(newCard2)
+    // })
+    // res.data.articles.jquery.map(item => {
+    //   let newCard3 = Card(item)
+    //   selectors.appendChild(newCard3)
+    // })
+    // res.data.articles.node.map(item => {
+    //   let newCard4 = Card(item)
+    //   selectors.appendChild(newCard4)
+    // })
+    // res.data.articles.technology.map(item => {
+    //   let newCard5 = Card(item)
+    //   selectors.appendChild(newCard5)
+    // })
 
   }) 
   .catch(err => {
